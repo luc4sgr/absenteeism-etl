@@ -15,26 +15,46 @@ app = typer.Typer()
 
 
 @app.command()
-def run(input: str, output: str, file: str):
+def run(
+    tipo: str = typer.Option(..., "--tipo", "-t", help="Tipo de dado: despesas, ausencias, etc."),
+    file: str = typer.Option(..., "--file", "-f", help="Nome do arquivo final (.xlsx)"),
+):
     """
-    Executa o pipeline ETL com os arquivos de entrada.
+    Executa o pipeline ETL para um determinado tipo de dado.
+
+    As pastas de entrada/saída são fixas:
+    - Entrada: data/input/{tipo}/
+    - Saída:  data/output/{tipo}/
     """
-    pipeline = ETLPipeline(input_folder=input, output_folder=output, output_file_name=file)
+    input_folder = f"data/input/{tipo}"
+    output_folder = f"data/output/{tipo}"
+
+    pipeline = ETLPipeline(
+        input_folder=input_folder,
+        output_folder=output_folder,
+        output_file_name=file
+    )
     pipeline.run()
 
 
+
 @app.command()
-def generate_data(count: int = 10, folder: str = "data/input"):
+def generate_data(
+    tipo: str = typer.Option(..., "--tipo", "-t", help="Tipo de dado a gerar"),
+    count: int = typer.Option(10, "--count", "-c", help="Quantidade de arquivos"),
+):
     """
-    Gera arquivos Excel com dados fictícios de absenteísmo.
+    Gera arquivos Excel sintéticos para simular dados do ETL.
     """
+    folder = f"data/input/{tipo}"
     os.makedirs(folder, exist_ok=True)
 
     for i in range(count):
         df = generate_absenteeism_data()
-        df.to_excel(os.path.join(folder, f"absenteeism_{i}.xlsx"), index=False)
+        df.to_excel(os.path.join(folder, f"{tipo}_{i}.xlsx"), index=False)
 
     typer.echo(f"✅ Gerados {count} arquivos em {folder}")
+
 
 
 if __name__ == "__main__":
