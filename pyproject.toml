@@ -1,23 +1,25 @@
 [project]
 name = "absenteeism-etl"
 version = "0.1.0"
-description = ""
+description = "Pipeline ETL para consolidar dados de absenteísmo"
 authors = [
-    {name = "luc4sgr",email = "23.lucasdoliveira@gmail.com"}
+    { name = "luc4sgr", email = "23.lucasdoliveira@gmail.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "pandas (>=2.2.3,<3.0.0)",
-    "openpyxl (>=3.1.5,<4.0.0)",
-    "faker (>=37.1.0,<38.0.0)"
+    "pandas>=2.2.3,<3.0.0",
+    "openpyxl>=3.1.5,<4.0.0",
+    "faker>=23.1.0,<24.0.0"
 ]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poetry]
+packages = [{ include = "app" }]
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"
-
+pytest-cov = "^6.1.1"
