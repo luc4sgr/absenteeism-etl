@@ -23,7 +23,8 @@ class DefaultTransformer(Transformer):
 
     def transform(self, data: list[pd.DataFrame]) -> pd.DataFrame:
         if not data:
-            raise ValueError("Nenhum dado fornencido para transformação")
+          raise ValueError("Nenhum dado fornecido para transformação")
+
 
         # axis | Ação | Resultado
         # 0 | Concatenação vertical | Adiciona linhas
