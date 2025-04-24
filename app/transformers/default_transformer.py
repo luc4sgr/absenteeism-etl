@@ -25,5 +25,8 @@ class DefaultTransformer(Transformer):
         if not data:
             raise ValueError("Nenhum dado fornencido para transformação")
 
+        # axis | Ação | Resultado
+        # 0 | Concatenação vertical | Adiciona linhas
+        # 1 | Concatenação horizontal | Adiciona colunas
         consolidated = pd.concat(data, axis=0, ignore_index=True)
         return consolidated
