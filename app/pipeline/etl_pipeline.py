@@ -10,6 +10,7 @@ Este pipeline aplica:
 from app.extractors.excel_extractor import ExcelExtractor
 from app.transformers.default_transformer import DefaultTransformer
 from app.loaders.excel_loader import ExcelLoader
+from app.core.logger import get_logger
 
 class ETLPipeline:
     """
@@ -24,20 +25,21 @@ class ETLPipeline:
         self.extractor = ExcelExtractor(input_folder)
         self.transformer = DefaultTransformer()
         self.loader = ExcelLoader(output_folder, output_file_name)
+        self.logger = get_logger("ETLPipeline")
     
     def run(self):
         """
         Executa o pipeline completo de ETL.
         """
-        print("🔍 Extraindo arquivos...")
-        
+        self.logger.info("Iniciando processo ETL")
+        self.logger.info("🔍 Extraindo arquivos...")
         raw_data = self.extractor.extract()
         
-        print("🔧 Transformando dados...")
+        self.logger.info("🔧 Transformando dados...")
         consolidated = self.transformer.transform(raw_data)
         
         
-        print("📦 Salvando arquivo final...")
+        self.logger.info("📦 Salvando arquivo final...")
         self.loader.load(consolidated)
 
-        print("✅ ETL finalizado com sucesso.")
+        self.logger.info("✅ ETL finalizado com sucesso.")
