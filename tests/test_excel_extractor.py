@@ -7,7 +7,6 @@ Usa o padrão AAA:
 - Assert: verificar o resultado
 """
 
-import os
 import pandas as pd
 import pytest
 
