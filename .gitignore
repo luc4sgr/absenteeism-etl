@@ -1,0 +1,38 @@
+# Bytecode / Cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Diretórios de cache de pytest
+.pytest_cache/
+
+# Arquivos de cobertura
+.coverage
+htmlcov/
+coverage.xml
+
+# Arquivos temporários e logs
+*.log
+*.tmp
+*.bak
+
+# Ambientes virtuais
+.venv/
+.env/
+
+# Poetry
+poetry.lock
+
+# Dados de entrada e saída
+data/input/
+data/output/
+
+# Arquivos de Excel temporários
+*.xlsx
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# VSCode configs
+.vscode/
